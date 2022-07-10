@@ -1,0 +1,51 @@
+h1{
+    color:blue;
+}
+
+.gameDisplay{
+    padding-left:  20%;;
+    padding-right: 20%;
+}
+.container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "a11 a12 a13"
+    "a21 a22 a23"
+    "a31 a32 a33";
+    background-color:black;
+    margin-left: 20px;
+    width: 1080px;
+}
+
+.a11 { grid-area: a11; }
+
+.a12 { grid-area: a12; }
+
+.a13 { grid-area: a13; }
+
+.a21 { grid-area: a21; }
+
+.a22 { grid-area: a22; }
+
+.a23 { grid-area: a23; }
+
+.a31 { grid-area: a31; }
+
+.a32 { grid-area: a32; }
+
+.a33 { grid-area: a33; }
+
+.gameButton{
+    height: 270px;
+
+    
+    width: 360px;
+    
+
+    
+
+    
+}
