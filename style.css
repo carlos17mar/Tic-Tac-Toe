@@ -1,5 +1,8 @@
+.header{
+    background-color: rgb(16, 16, 16);
+}
 h1{
-    color:blue;
+    color:rgb(255, 128, 0);
 }
 
 .gameDisplay{
@@ -40,8 +43,6 @@ h1{
 
 .gameButton{
     height: 270px;
-
-    
     width: 360px;
     
 

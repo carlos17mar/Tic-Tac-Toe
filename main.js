@@ -1,30 +1,51 @@
-const Player = (sign) => {
+class Player {
+  constructor(sign) {
     this.sign = sign;
-    getSign();
-
-    function getSign() {
-        function getSign() {
-            return sign;
-        }
-    }
-};
-
-const GameBoard = () => {
-  let board = new Array(8);
-  board.fill(1);
- 
-};
-let board = GameBoard();
-const Move = (_Player, move) => {
-  const player = _Player;
-  this.move = move;
-
-  return { player, move };
+  }
+  getSign() {
+    return this.sign;
+  }
 }
 
-const player1 = Player("x");
-const player2 = Player("o");
+class GameBoard {
+    
+  constructor(board = new Array(8)) {
+    this.board = board;
+  }
+  getBoard() {
+    return this.board;
+  }
+  getSquare(coordinates){
+    return this.board[coordinates];
 
-console.log(player1);
-console.log(player2.getSign());
-console.log(board);
+  }
+
+  insertMove(Move) {
+    let coordinates = Move.getCoordinates();
+    return this.board.splice(coordinates,Move);
+  }
+}
+class Move {
+  constructor(coordinates, Player) {
+    this.coordinates = coordinates;
+    this.Player = Player;
+  }
+
+  getCoordinates() {
+    return this.move;
+  }
+  getPlayer(){
+    return this.Player;
+
+  }
+}
+
+const player1 = new Player("x");
+const player2 = new Player("o");
+let gameboard = new GameBoard();
+let move1 = new Move(4,player2);
+console.log(move1.getPlayer());
+gameboard.insertMove(move1);
+console.log(gameboard.getBoard());
+console.log(move1.getCoordinates());
+console.log(gameboard.getSquare(4));
