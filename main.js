@@ -8,8 +8,7 @@ class Player {
 }
 
 class GameBoard {
-    
-  constructor(board = new Array(8)) {
+  constructor(board = []) {
     this.board = board;
   }
   getBoard() {
@@ -19,10 +18,8 @@ class GameBoard {
     return this.board[coordinates];
 
   }
-
   insertMove(Move) {
-    let coordinates = Move.getCoordinates();
-    return this.board.splice(coordinates,Move);
+    this.board.push(Move);
   }
 }
 class Move {
@@ -47,5 +44,7 @@ let move1 = new Move(4,player2);
 console.log(move1.getPlayer());
 gameboard.insertMove(move1);
 console.log(gameboard.getBoard());
-console.log(move1.getCoordinates());
-console.log(gameboard.getSquare(4));
+console.log(move1);
+console.log(gameboard);
+const getMove = gameboard.getSquare(0);
+console.log(getMove.getPlayer().getSign());
