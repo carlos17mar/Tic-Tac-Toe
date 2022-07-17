@@ -13,7 +13,7 @@ class GameBoard {
   }
   existMove(Move) {
     for (let i = 0; i < this.board.length; i++) {
-      if (this.board[i] === Move) {
+      if (this.board[i].coordinates === Move.coordinates) {
         return true;
       }
     }
@@ -25,38 +25,31 @@ class GameBoard {
   setMove(Move) {
     if (this.existMove(Move)) {
       console.log("The movement has already been done");
+      return false;
     } else {
       this.insertMove(Move);
+      return true;
+      
     }
   }
-  checkBoard() {
- const winningMoves = 
-            [[0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8],
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 5, 8],
-            [0, 4, 8],
-            [2, 4, 6]];
-
-   
-
-        for (let z = 0; z < winningMoves.length; z++) {
-console.log("------------------------------")
-            
-             for(let i = 0 ; i<3;i++){
-
-           console.log(winningMoves[z][i]);
-            
-        }
-
+  checkBoard() {//Meter los movimientos de cada player en un array y comprobar si coinciden
+    const winningMoves = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    let player1 = [];
+    let player2 = [];
+    for (let i = 0; i < this.board.length; i++) {
+      if (this.board[i].Player.getSign === "x") {
+        console.log("hola");
+      }
     }
-
-
-        
-
-
   }
 
   //Funcion que comprueba si se a pulsado ese boton
@@ -67,10 +60,11 @@ console.log("------------------------------")
     return this.board[coordinates];
   }
   reset() {
-    for (let i = 0; i < this.board.length; i++){
-        this.board[i] = null;
-        this.board.length = 0;
-  }}
+    for (let i = 0; i < this.board.length; i++) {
+      this.board[i] = null;
+      this.board.length = 0;
+    }
+  }
   insertMove(Move) {
     this.board.push(Move);
   }
@@ -86,7 +80,7 @@ class Move {
     return this.move;
   }
   getPlayer() {
-    return this.Player;
+    return this.Player.getSign;
   }
 }
 
@@ -95,24 +89,27 @@ const player1 = new Player("x");
 const player2 = new Player("o");
 let gameboard = new GameBoard();
 
-
-
-
 const buttons = document.querySelectorAll("button");
 buttons.forEach((buttons) => {
   buttons.addEventListener("click", () => {
     if (round > 9) {
-        gameboard.reset();
-        round =1;
+      gameboard.reset();
+      round = 1;
     } else if (round % 2 == 0) {
-      gameboard.setMove(new Move(buttons.id, player1));
-      console.log(gameboard);
+        if(gameboard.setMove(new Move(buttons.id, player1))){
       round++;
+
+        };
+      
+      console.log(gameboard);
       gameboard.checkBoard();
     } else {
-      gameboard.setMove(new Move(buttons.id, player2));
+      if(gameboard.setMove(new Move(buttons.id, player2))){
+round++;
+      };
       console.log(gameboard);
-      round++;
+      
+      gameboard.checkBoard();
     }
   });
 });
