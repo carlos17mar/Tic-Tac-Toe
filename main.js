@@ -108,13 +108,10 @@ let round = 1;
 const player1 = new Player("x");
 const player2 = new Player("o");
 let gameboard = new GameBoard();
-function wait(ms) {
-  var start = new Date().getTime();
-  var end = start;
-  while (end < start + ms) {
-    end = new Date().getTime();
-  }
-}
+
+
+
+
 const buttons = document.querySelectorAll("button");
 buttons.forEach((buttons) => {
   buttons.addEventListener("click", () => {
