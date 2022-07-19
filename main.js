@@ -29,10 +29,10 @@ class GameBoard {
     } else {
       this.insertMove(Move);
       return true;
-      
     }
   }
-  checkBoard() {//Meter los movimientos de cada player en un array y comprobar si coinciden
+  checkBoard() {
+    //Meter los movimientos de cada player en un array y comprobar si coinciden
     const winningMoves = [
       [0, 1, 2],
       [3, 4, 5],
@@ -96,23 +96,36 @@ buttons.forEach((buttons) => {
       gameboard.reset();
       round = 1;
     } else if (round % 2 == 0) {
-        if(gameboard.setMove(new Move(buttons.id, player1))){
-      round++;
+      if (gameboard.setMove(new Move(buttons.id, player1))) {
+        transformButton(buttons.id, player1);
+        round++;
+      }
 
-        };
-      
       console.log(gameboard);
       gameboard.checkBoard();
     } else {
-      if(gameboard.setMove(new Move(buttons.id, player2))){
-round++;
-      };
+      if (gameboard.setMove(new Move(buttons.id, player2))) {
+        transformButton(buttons.id,player2);
+        round++;
+      }
       console.log(gameboard);
-      
+
       gameboard.checkBoard();
     }
   });
 });
+
+function transformButton(buttonId, player) {
+  const display = document.getElementsByClassName("container");
+  const button = document.getElementById(`${buttonId}`);
+  if(player  === player1){
+    button.innerHTML='X';
+
+  }else {
+button.innerHTML='O';
+  }
+  
+}
 
 console.log(gameboard.getBoard());
 console.log(gameboard);
