@@ -93,6 +93,7 @@ const buttons = document.querySelectorAll("button");
 buttons.forEach((buttons) => {
   buttons.addEventListener("click", () => {
     if (round > 9) {
+      boardReset();
       gameboard.reset();
       round = 1;
     } else if (round % 2 == 0) {
@@ -105,7 +106,7 @@ buttons.forEach((buttons) => {
       gameboard.checkBoard();
     } else {
       if (gameboard.setMove(new Move(buttons.id, player2))) {
-        transformButton(buttons.id,player2);
+        transformButton(buttons.id, player2);
         round++;
       }
       console.log(gameboard);
@@ -114,17 +115,23 @@ buttons.forEach((buttons) => {
     }
   });
 });
+function boardReset() {
+  let buttons = document.getElementsByClassName("gameButton");
+  for(let i = 1;i<=9;i++){
+    let button = document.getElementById(`${i}`);
+    button.innerHTML=' ';
+  }
+
+  }
 
 function transformButton(buttonId, player) {
-  const display = document.getElementsByClassName("container");
   const button = document.getElementById(`${buttonId}`);
-  if(player  === player1){
-    button.style.color='green';
-    button.innerHTML='X';
-
-  }else {
-button.innerHTML='O';
-button.style.color= 'blue';
+  if (player === player1) {
+    button.style.color = "green";
+    button.innerHTML = "X";
+  } else {
+    button.innerHTML = "O";
+    button.style.color = "blue";
   }
 }
 
