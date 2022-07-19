@@ -125,7 +125,6 @@ buttons.forEach((buttons) => {
         transformButton(buttons.id, player1);
         round++;
         if (gameboard.checkBoard()) {
-          wait(500);
           boardReset();
           gameboard.reset();
           round = 1;
@@ -138,7 +137,7 @@ buttons.forEach((buttons) => {
         round++;
         if (gameboard.checkBoard()) {
             
-          wait(500);
+       
           boardReset();
           gameboard.reset();
           round = 1;
@@ -147,6 +146,7 @@ buttons.forEach((buttons) => {
     }
   });
 });
+
 function boardReset() {
   let buttons = document.getElementsByClassName("gameButton");
   for (let i = 1; i <= 9; i++) {
