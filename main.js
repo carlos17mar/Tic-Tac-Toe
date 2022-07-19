@@ -32,20 +32,18 @@ class GameBoard {
     }
   }
   checkBoard() {
-    //Meter los movimientos de cada player en un array y comprobar si coinciden
-    const winningMoves = [ //Falta meter que devuelva un ganador
+    const winningMoves = [
       ["1", "2", "3"],
       ["4", "5", "6"],
       ["7", "8", "9"],
-      ['1', '4', '7'],
-      ['2', '5', '8'],
-      ['3', '6', '9'],
-      ['1', '5', '9'],
-      ['3','5', '7'],
+      ["1", "4", "7"],
+      ["2", "5", "8"],
+      ["3", "6", "9"],
+      ["1", "5", "9"],
+      ["3", "5", "7"],
     ];
     let player1 = [];
     let player2 = [];
-    let winner = new Player();
     for (let i = 0; i < this.board.length; i++) {
       if (this.board[i].Player.sign === "x") {
         player1.push(this.board[i].coordinates);
@@ -53,7 +51,6 @@ class GameBoard {
         player2.push(this.board[i].coordinates);
       }
     }
-
 
     function arrayContainsAnotherArray(needle, haystack) {
       for (var i = 0; i < needle.length; i++) {
@@ -64,21 +61,18 @@ class GameBoard {
     for (let z = 0; z < winningMoves.length; z++) {
       let dummyArray = [];
       dummyArray = winningMoves[z];
-     
-      if(arrayContainsAnotherArray(dummyArray, player1)){
-        alert('The winner is Player 1');
-       
-      }else if(arrayContainsAnotherArray(dummyArray, player2)){
-        alert('The winner is Player 2');
-      
+
+      if (arrayContainsAnotherArray(dummyArray, player1)) {
+        alert("The winner is Player 1");
+        return true;
+      } else if (arrayContainsAnotherArray(dummyArray, player2)) {
+        alert("The winner is Player 2");
+        return true;
       }
-      
     }
-
-
+    return false;
   }
 
-  //Funcion que comprueba si se a pulsado ese boton
   getBoard() {
     return this.board;
   }
@@ -114,7 +108,13 @@ let round = 1;
 const player1 = new Player("x");
 const player2 = new Player("o");
 let gameboard = new GameBoard();
-
+function wait(ms) {
+  var start = new Date().getTime();
+  var end = start;
+  while (end < start + ms) {
+    end = new Date().getTime();
+  }
+}
 const buttons = document.querySelectorAll("button");
 buttons.forEach((buttons) => {
   buttons.addEventListener("click", () => {
@@ -122,17 +122,30 @@ buttons.forEach((buttons) => {
       boardReset();
       gameboard.reset();
       round = 1;
+      alert("Its a tie.");
     } else if (round % 2 == 0) {
       if (gameboard.setMove(new Move(buttons.id, player1))) {
         transformButton(buttons.id, player1);
         round++;
+        if (gameboard.checkBoard()) {
+          wait(500);
+          boardReset();
+          gameboard.reset();
+          round = 1;
+        }
       }
-      gameboard.checkBoard();
     } else {
       if (gameboard.setMove(new Move(buttons.id, player2))) {
         transformButton(buttons.id, player2);
+       
         round++;
-        gameboard.checkBoard();
+        if (gameboard.checkBoard()) {
+            
+          wait(500);
+          boardReset();
+          gameboard.reset();
+          round = 1;
+        }
       }
     }
   });
@@ -156,4 +169,3 @@ function transformButton(buttonId, player) {
   }
 }
 
-const getMove = gameboard.getSquare(0);

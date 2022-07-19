@@ -1,13 +1,25 @@
 .header{
-    background-color: rgb(16, 16, 16);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style:italic;
+    text-align: center;
+    background-color: rgb(0, 0, 0);
 }
+body{
+    background-color: black;
+}
+
 h1{
-    color:rgb(255, 149, 0);
+    color:rgb(255, 255, 255);
 }
 
 .gameDisplay{
-    padding-left:  20%;;
-    padding-right: 20%;
+
+
+    padding-left: 20%;
+    padding-top: 0%;
+    padding-right: 10%;
+    padding-bottom: 0%;
+    position: fixed;
 }
 .container {  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
