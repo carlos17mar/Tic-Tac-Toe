@@ -33,23 +33,49 @@ class GameBoard {
   }
   checkBoard() {
     //Meter los movimientos de cada player en un array y comprobar si coinciden
-    const winningMoves = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6],
+    const winningMoves = [ //Falta meter que devuelva un ganador
+      ["1", "2", "3"],
+      ["4", "5", "6"],
+      ["7", "8", "9"],
+      ['1', '4', '7'],
+      ['2', '5', '8'],
+      ['3', '6', '9'],
+      ['1', '5', '9'],
+      ['3','5', '7'],
     ];
     let player1 = [];
     let player2 = [];
+    let winner = new Player();
     for (let i = 0; i < this.board.length; i++) {
-      if (this.board[i].Player.getSign === "x") {
-        console.log("hola");
+      if (this.board[i].Player.sign === "x") {
+        player1.push(this.board[i].coordinates);
+      } else {
+        player2.push(this.board[i].coordinates);
       }
     }
+
+
+    function arrayContainsAnotherArray(needle, haystack) {
+      for (var i = 0; i < needle.length; i++) {
+        if (haystack.indexOf(needle[i]) === -1) return false;
+      }
+      return true;
+    }
+    for (let z = 0; z < winningMoves.length; z++) {
+      let dummyArray = [];
+      dummyArray = winningMoves[z];
+     
+      if(arrayContainsAnotherArray(dummyArray, player1)){
+        alert('The winner is Player 1');
+       
+      }else if(arrayContainsAnotherArray(dummyArray, player2)){
+        alert('The winner is Player 2');
+      
+      }
+      
+    }
+
+
   }
 
   //Funcion que comprueba si se a pulsado ese boton
@@ -80,7 +106,7 @@ class Move {
     return this.move;
   }
   getPlayer() {
-    return this.Player.getSign;
+    return this.Player;
   }
 }
 
@@ -101,28 +127,23 @@ buttons.forEach((buttons) => {
         transformButton(buttons.id, player1);
         round++;
       }
-
-      console.log(gameboard);
       gameboard.checkBoard();
     } else {
       if (gameboard.setMove(new Move(buttons.id, player2))) {
         transformButton(buttons.id, player2);
         round++;
+        gameboard.checkBoard();
       }
-      console.log(gameboard);
-
-      gameboard.checkBoard();
     }
   });
 });
 function boardReset() {
   let buttons = document.getElementsByClassName("gameButton");
-  for(let i = 1;i<=9;i++){
+  for (let i = 1; i <= 9; i++) {
     let button = document.getElementById(`${i}`);
-    button.innerHTML=' ';
+    button.innerHTML = " ";
   }
-
-  }
+}
 
 function transformButton(buttonId, player) {
   const button = document.getElementById(`${buttonId}`);
@@ -135,7 +156,4 @@ function transformButton(buttonId, player) {
   }
 }
 
-console.log(gameboard.getBoard());
-console.log(gameboard);
 const getMove = gameboard.getSquare(0);
-console.log(gameboard);
