@@ -119,12 +119,13 @@ function transformButton(buttonId, player) {
   const display = document.getElementsByClassName("container");
   const button = document.getElementById(`${buttonId}`);
   if(player  === player1){
+    button.style.color='green';
     button.innerHTML='X';
 
   }else {
 button.innerHTML='O';
+button.style.color= 'blue';
   }
-  
 }
 
 console.log(gameboard.getBoard());
